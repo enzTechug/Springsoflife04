@@ -10,23 +10,52 @@ body {
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
 }
+/* Fix logo white line issue */
+.navbar-logo {
+    display: block;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+/* Ensure the logo container has proper background */
+.flex.items-center {
+    background: transparent;
+}
+
+/* Remove any potential borders or outlines */
+.navbar-logo:focus,
+.navbar-logo:hover {
+    outline: none;
+    border: none;
+}
 
 /* Enhanced Navbar */
+/* Replace the existing navbar styles */
 #navbar {
-    background-color: rgba(192, 186, 13, 0.392);
+    background-color: rgba(127, 129, 5, 0.413) !important; /* Solid white */
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 #navbar.scrolled {
-    background-color: rgba(47, 93, 98, 0.9);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+    background-color: rgba(255, 255, 255, 0.98) !important;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar-logo {
-    height: 3.4rem;
+    height: 3.8rem;
     width: auto;
     transition: all 0.3s ease;
+}
+
+/* Mobile logo sizing */
+@media (max-width: 768px) {
+    .navbar-logo {
+        height: 3.5rem !important; /* 40px on mobile */
+        width: auto;
+    }
 }
 
 @media (max-width: 768px) {
@@ -64,6 +93,35 @@ body {
     opacity: 1;
     transform: scale(1);
     animation: panImage 16s ease-in-out infinite;
+}
+/* Fixed background for desktop */
+@media (min-width: 769px) {
+    #hero-section .hero-bg {
+        background-attachment: fixed;
+    }
+    
+    /* Target the specific background divs */
+    #hero-background-1,
+    #hero-background-2,
+    #hero-background-3,
+    #hero-background-4,
+    #hero-background-5,
+    #hero-background-6 {
+        background-attachment: fixed;
+    }
+}
+
+/* Ensure smooth transitions */
+#hero-background-1,
+#hero-background-2,
+#hero-background-3,
+#hero-background-4,
+#hero-background-5,
+#hero-background-6 {
+    transition: opacity 1.5s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 @keyframes panImage {
@@ -274,6 +332,7 @@ img, [style*="background-image"] {
         padding-top: 4rem;
         padding-bottom: 4rem;
     }
+
 }
 
 /* Tablet Optimizations */
