@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | Spring of Life Elderly Care</title>
+    <title data-key="contactHeroTitle">Contact Us | Spring of Life Elderly Care</title>
     <link rel="icon" type="image/x-icon" href="springs logo.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -30,7 +30,7 @@
         <!-- Logo only on mobile, logo + text on desktop -->
         <div class="flex items-center">
             <img src="springs logo.png" alt="Logo" class="navbar-logo h-8 w-auto">
-            <span class="hidden md:inline text-xl font-bold text-primary ml-2 font-heading">Spring of Life Elderly Care</span>
+            <span class="hidden md:inline text-xl font-bold text-primary ml-2 font-heading" data-key="orgName">Spring of Life Elderly Care</span>
         </div>
 
         <!-- Language switcher and mobile menu - always visible on mobile -->
@@ -89,8 +89,8 @@
     <main class="mt-[70px]">
         <section class="bg-accent py-16">
             <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold text-primary font-heading" data-key="contactHeroTitle">Get in Touch</h1>
-                <p class="text-lg md:text-xl text-warm-gray mt-4 max-w-2xl mx-auto" data-key="contactHeroSubtitle">We'd love to hear from you. Whether you have a question, want to volunteer, or need support.</p>
+                <h1 class="text-4xl md:text-5xl font-bold text-primary font-heading" data-key="contactHeroTitle">Get In Touch</h1>
+                <p class="text-lg md:text-xl text-warm-gray mt-4 max-w-2xl mx-auto" data-key="contactHeroSubtitle">We would love to hear from you.</p>
             </div>
         </section>
 
@@ -99,26 +99,59 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                     
                     <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
-                        <h2 class="text-3xl font-bold text-primary mb-6 font-heading" data-key="contactFormTitle">Send Us a Message</h2>
-                        <form action="contact.php" method="POST">
-                            <div class="mb-4">
-                                <label for="name" class="block text-warm-gray font-semibold mb-2" data-key="contactFormName">Full Name</label>
-                                <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded-lg text-warm-gray focus:outline-none focus:ring-2 focus:ring-primary" required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="email" class="block text-warm-gray font-semibold mb-2" data-key="contactFormEmail">Email Address</label>
-                                <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg text-warm-gray focus:outline-none focus:ring-2 focus:ring-primary" required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="message" class="block text-warm-gray font-semibold mb-2" data-key="contactFormMessage">Message</label>
-                                <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border rounded-lg text-warm-gray focus:outline-none focus:ring-2 focus:ring-primary" required></textarea>
-                            </div>
-                            <div>
-                                <button type="submit" class="w-full bg-primary hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300" data-key="contactFormButton">
-                                    Send Message
-                                </button>
-                            </div>
-                        </form>
+                        <h2 class="text-3xl font-bold text-primary mb-6 font-heading" data-key="contactFormTitle">Get in touch</h2>
+                        <p class="text-warm-gray mb-6" data-key="contactFormDescription">We welcome messages from individuals, sponsors, churches, organizations, and anyone who wants to know more about Spring of Life, support our work, or partner with us. Please fill in the form below and we will respond as soon as possible.</p>
+                        <form action="contact_form.php" method="POST" id="contact-form"></form>
+                       <div class="mb-6">
+        <label for="name" class="block text-warm-gray mb-2" data-key="contactName">Your Name</label>
+        <input type="text" id="name" name="name" required 
+               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+    </div>
+    
+    <div class="mb-6">
+        <label for="email" class="block text-warm-gray mb-2" data-key="contactEmail">Email Address</label>
+        <input type="email" id="email" name="email" required 
+               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+    </div>
+    
+    <div class="mb-6">
+        <label for="subject" class="block text-warm-gray mb-2" data-key="contactSubject">Subject</label>
+        <input type="text" id="subject" name="subject" required 
+               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+    </div>
+    
+    <div class="mb-6">
+        <label for="message" class="block text-warm-gray mb-2" data-key="contactMessage">Your Message</label>
+        <textarea id="message" name="message" rows="6" required 
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+    </div>
+    
+    <button type="submit" class="w-full bg-primary hover:bg-green-700 text-white font-bold py-4 px-8 rounded-full text-xl transition duration-300" data-key="contactSendBtn">
+        Send Message
+    </button>
+</form>
+
+<script>
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    fetch('contact_form.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Message sent successfully!');
+            this.reset();
+        } else {
+            alert('Error sending message. Please try again.');
+        }
+    });
+});
+</script>
                     </div>
 
                     <div class="pt-8">
@@ -127,30 +160,41 @@
                             <div class="flex items-start">
                                 <div class="text-2xl text-primary mt-1 mr-4"><i class="fas fa-map-marker-alt"></i></div>
                                 <div>
-                                    <h3 class="text-xl font-semibold text-warm-gray font-heading" data-key="contactInfoOffice">Our Office</h3>
-                                    <p class="text-lg text-warm-gray" data-key="contactInfoOfficeAddress">Zombo District, Uganda</p>
+                                    <h3 class="text-xl font-semibold text-warm-gray font-heading" data-key="contactLocationTitle">Our Location</h3>
+                                    <p class="text-lg text-warm-gray" data-key="contactLocation1">Zombo District, Northern Uganda</p>
+                                    <p class="text-sm text-warm-gray mt-1" data-key="contactLocation2">Administrative coordination from Sweden</p>
                                 </div>
                             </div>
                             <div class="flex items-start">
                                 <div class="text-2xl text-primary mt-1 mr-4"><i class="fas fa-envelope"></i></div>
                                 <div>
-                                    <h3 class="text-xl font-semibold text-warm-gray font-heading" data-key="contactInfoEmail">Email Us</h3>
-                                    <p class="text-lg text-primary hover:text-green-700"><a href="mailto:info@springoflifeelderlycare.org">info@springoflifeelderlycare.org</a></p>
+                                    <h3 class="text-xl font-semibold text-warm-gray font-heading" data-key="contactEmailTitle">Email Us</h3>
+                                    <p class="text-lg text-primary hover:text-green-700 mb-1"><a href="mailto:info@springoflifeelderlycare.org">info@springoflifeelderlycare.org</a></p>
+                                    <p class="text-lg text-primary hover:text-green-700"><a href="mailto:admin@springoflifeelderlycare.org">admin@springoflifeelderlycare.org</a></p>
                                 </div>
                             </div>
                             <div class="flex items-start">
-                                <div class="text-2xl text-primary mt-1 mr-4"><i class="fas fa-phone-alt"></i></div>
+                                <div class="text-2xl text-primary mt-1 mr-4"><i class="fab fa-whatsapp"></i></div>
                                 <div>
-                                    <h3 class="text-xl font-semibold text-warm-gray font-heading" data-key="contactInfoPhone">Call Us</h3>
-                                    <p class="text-lg text-warm-gray">+256 XXX XXX XXX</p>
+                                    <h3 class="text-xl font-semibold text-warm-gray font-heading" data-key="contactWhatsAppTitle">WhatsApp</h3>
+                                    <p class="text-lg text-warm-gray" data-key="contactWhatsApp1">+256 787 116327 (Uganda)</p>
+                                    <p class="text-lg text-warm-gray" data-key="contactWhatsApp2">+46 *** *** *** (Sweden - working on it)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="text-2xl text-primary mt-1 mr-4"><i class="fas fa-clock"></i></div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-warm-gray font-heading" data-key="contactOfficeTitle">Office Hours</h3>
+                                    <p class="text-lg text-warm-gray" data-key="contactOffice1">Monday–Friday</p>
+                                    <p class="text-lg text-warm-gray" data-key="contactOffice2">9:00 AM – 5:00 PM (EAT & CET)</p>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="mt-12 bg-accent p-6 rounded-lg">
-                            <h3 class="text-xl font-bold text-primary mb-4 font-heading">BE PART OF THE CHANGE</h3>
-                            <p class="text-warm-gray mb-4">Every small act of kindness restores dignity to an elderly person. You can help today through prayer, volunteering, or a monthly gift.</p>
-                            <a href="donate.html" class="bg-primary hover:bg-green-700 text-white font-bold py-2 px-6 rounded-full transition duration-300 inline-block">
+                            <h3 class="text-xl font-bold text-primary mb-4 font-heading" data-key="contactCallToActionTitle">BE PART OF THE CHANGE</h3>
+                            <p class="text-warm-gray mb-4" data-key="contactCallToActionText">Every small act of kindness restores dignity to an elderly person. You can help today through prayer, volunteering, or a monthly gift.</p>
+                            <a href="donate.html" class="bg-primary hover:bg-green-700 text-white font-bold py-2 px-6 rounded-full transition duration-300 inline-block" data-key="contactCallToActionBtn">
                                 Donate Now
                             </a>
                         </div>
@@ -165,8 +209,8 @@
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div>
-                    <h4 class="text-xl font-bold text-white mb-4 font-heading">Spring of Life Elderly Care</h4>
-                    <p class="text-accent/80 mb-4">Providing dignity, care, and support for elders in Zombo, Uganda.</p>
+                    <h4 class="text-xl font-bold text-white mb-4 font-heading" data-key="orgName">Spring of Life Elderly Care</h4>
+                    <p class="text-accent/80 mb-4" data-key="footerDescription">Restoring dignity, hope, and care to the elderly in Uganda.</p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-white hover:text-secondary text-2xl" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="text-white hover:text-secondary text-2xl" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -174,28 +218,28 @@
                     </div>
                 </div>
                 <div>
-                    <h5 class="text-lg font-semibold text-white mb-4 font-heading">Quick Links</h5>
+                    <h5 class="text-lg font-semibold text-white mb-4 font-heading" data-key="quickLinksTitle">Quick Links</h5>
                     <ul class="space-y-2">
-                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
-                        <li><a href="programs.html" class="hover:text-white">Programs</a></li>
-                        <li><a href="stories.html" class="hover:text-white">Stories</a></li>
-                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                        <li><a href="about.html" class="hover:text-white" data-key="navAbout">About Us</a></li>
+                        <li><a href="programs.html" class="hover:text-white" data-key="navPrograms">Programs</a></li>
+                        <li><a href="stories.html" class="hover:text-white" data-key="navStories">Stories</a></li>
+                        <li><a href="contact.html" class="hover:text-white" data-key="navContact">Contact</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h5 class="text-lg font-semibold text-white mb-4 font-heading">Get Involved</h5>
+                    <h5 class="text-lg font-semibold text-white mb-4 font-heading" data-key="getInvolvedTitle">Get Involved</h5>
                     <ul class="space-y-2">
-                        <li><a href="donate.html" class="hover:text-white">Donate Now</a></li>
-                        <li><a href="#" class="hover:text-white">Volunteer</a></li>
-                        <li><a href="#" class="hover:text-white">Partnerships</a></li>
+                        <li><a href="donate.html" class="hover:text-white" data-key="navDonateBtn">Donate Now</a></li>
+                        <li><a href="#" class="hover:text-white" data-key="volunteer">Volunteer</a></li>
+                        <li><a href="#" class="hover:text-white" data-key="partnerships">Partnerships</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h5 class="text-lg font-semibold text-white mb-4 font-heading">Stay Updated</h5>
-                    <p class="mb-4">Get news and impact stories straight to your inbox.</p>
+                    <h5 class="text-lg font-semibold text-white mb-4 font-heading" data-key="stayUpdatedTitle">Stay Updated</h5>
+                    <p class="mb-4" data-key="footerNewsletterPrompt">Get news and impact stories straight to your inbox.</p>
                     <form>
-                        <input type="email" placeholder="Your email address" class="w-full px-4 py-2 rounded text-warm-gray mb-2">
-                        <button type="submit" class="w-full bg-secondary hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                        <input type="email" placeholder="Your email address" class="w-full px-4 py-2 rounded text-warm-gray mb-2" data-key-placeholder="emailPlaceholder">
+                        <button type="submit" class="w-full bg-secondary hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded transition duration-300" data-key="subscribeBtn">
                             Subscribe
                         </button>
                     </form>
@@ -203,10 +247,12 @@
             </div>
             <hr class="border-t border-accent/30 my-6">
             <div class="text-center text-sm text-accent/80">
-                <p>&copy; 2025 Spring of Life Elderly Care. All rights reserved.</p>
+                <p>&copy; 2025 <span data-key="orgName">Spring of Life</span>. <span data-key="allRightsReserved">All rights reserved.</span></p>
                 <p>
-                    <a href="#" class="hover:text-white">Privacy Policy</a> | 
-                    <a href="#" class="hover:text-white">Terms of Use</a>
+                    <a href="#" class="hover:text-white" data-key="privacyPolicy">Privacy Policy</a> | 
+                    <a href="#" class="hover:text-white" data-key="termsOfUse">Terms of Use</a> | 
+                    <a href="donate.html" class="hover:text-white" data-key="navDonateBtn">Donate</a> | 
+                    <a href="contact.html" class="hover:text-white" data-key="navContact">Contact Us</a>
                 </p>
             </div>
         </div>
@@ -215,5 +261,4 @@
     <script src="translations.js"></script>
     <script src="main.js"></script>
 </body>
-
 </html>
